@@ -4,7 +4,7 @@ namespace OnlineStoreProjectOOP;
 
 public class Runner
 {
-    public static readonly DataBase dataBase = new DataBase();
+    public static readonly DataBaseWork dataBase = new DataBaseWork();
     public static User User;
 
     public static Task Main()
@@ -12,8 +12,7 @@ public class Runner
         string file =
             File.ReadAllText(
                 @"C:\Users\Xiaomi\RiderProjects\OnlineStoreProjectOOP\OnlineStoreProjectOOP\DataBase.json");
-        var myList = JsonConvert.DeserializeObject<List<Product>>(file);
-        dataBase.ProductsList = myList;
+        dataBase.ProductsList = JsonConvert.DeserializeObject<List<Product>>(file);
         int idForProduct = dataBase.ProductsList![dataBase.ProductsList.Count - 1].ID;
         bool isReg = false;
         while (!isReg)
@@ -55,7 +54,7 @@ public class Runner
                     i = Convert.ToInt32(Console.ReadLine());
                     if (i == 1)
                     {
-                        dataBase.Show(Product.Kategory.Clothes);
+                        dataBase.Show(Category.Clothes);
                         Console.WriteLine("(0)->Menu");
                         Console.WriteLine("(1)->Add to cart");
                         Console.WriteLine("(2)->See the list of products");
@@ -66,7 +65,7 @@ public class Runner
                             int id = Convert.ToInt32(Console.ReadLine());
                             try
                             {
-                                if (dataBase.SetProduct(id).Type != Product.Kategory.Clothes)
+                                if (dataBase.SetProduct(id).Type != Category.Clothes)
                                     Console.WriteLine("The product with this ID isn't in this category");
                                 else User.AddBasket(id);
                             }
@@ -86,7 +85,7 @@ public class Runner
 
                     if (i == 2)
                     {
-                        dataBase.Show(Product.Kategory.Gadget);
+                        dataBase.Show(Category.Gadget);
                         Console.WriteLine("(0)->Menu");
                         Console.WriteLine("(1)->Add to cart");
                         Console.WriteLine("(2)->See the list of products");
@@ -97,7 +96,7 @@ public class Runner
                             int id = Convert.ToInt32(Console.ReadLine());
                             try
                             {
-                                if (dataBase.SetProduct(id).Type != Product.Kategory.Gadget)
+                                if (dataBase.SetProduct(id).Type != Category.Gadget)
                                     Console.WriteLine("The product with this ID isn't in this category");
                                 else User.AddBasket(id);
                             }
@@ -117,7 +116,7 @@ public class Runner
 
                     if (i == 3)
                     {
-                        dataBase.Show(Product.Kategory.Food);
+                        dataBase.Show(Category.Food);
                         Console.WriteLine("(0)->Menu");
                         Console.WriteLine("(1)->Add to cart");
                         Console.WriteLine("(2)->See the list of products");
@@ -128,7 +127,7 @@ public class Runner
                             int id = Convert.ToInt32(Console.ReadLine());
                             try
                             {
-                                if (dataBase.SetProduct(id).Type != Product.Kategory.Food)
+                                if (dataBase.SetProduct(id).Type != Category.Food)
                                     Console.WriteLine("The product with this ID isn't in this category");
                                 else User.AddBasket(id);
                             }
@@ -148,7 +147,7 @@ public class Runner
 
                     if (i == 4)
                     {
-                        dataBase.Show(Product.Kategory.Sport);
+                        dataBase.Show(Category.Sport);
                         Console.WriteLine("(0)->Menu");
                         Console.WriteLine("(1)->Add to cart");
                         Console.WriteLine("(2)->See the list of products");
@@ -159,7 +158,7 @@ public class Runner
                             int id = Convert.ToInt32(Console.ReadLine());
                             try
                             {
-                                if (dataBase.SetProduct(id).Type != Product.Kategory.Sport)
+                                if (dataBase.SetProduct(id).Type != Category.Sport)
                                     Console.WriteLine("The product with this ID isn't in this category");
                                 else User.AddBasket(id);
                             }
@@ -179,7 +178,7 @@ public class Runner
 
                     if (i == 5)
                     {
-                        dataBase.Show(Product.Kategory.Another);
+                        dataBase.Show(Category.Another);
                         Console.WriteLine("(0)->Menu");
                         Console.WriteLine("(1)->Add to cart");
                         Console.WriteLine("(2)->See the list of products");
@@ -190,7 +189,7 @@ public class Runner
                             int id = Convert.ToInt32(Console.ReadLine());
                             try
                             {
-                                if (dataBase.SetProduct(id).Type != Product.Kategory.Sport)
+                                if (dataBase.SetProduct(id).Type != Category.Sport)
                                     Console.WriteLine("The product with this ID isn't in this category");
                                 else User.AddBasket(id);
                             }
@@ -214,7 +213,7 @@ public class Runner
                 {
                     Console.Write("Enter the sum for which you want to top up the account:");
                     i = Convert.ToInt32(Console.ReadLine());
-                    User.Card.Sum += i;
+                    User.Card.SetSum(User.Card.GetSum() + i);
                     i = 0;
                     continue;
                 }
@@ -247,12 +246,12 @@ public class Runner
                     Console.WriteLine(
                         "Enter the Type of the product \n1-Sport \n2-Clothes \n3-Gadget \n4-Food \n5-Another");
                     int kategory = Convert.ToInt32(Console.ReadLine());
-                    Product.Kategory type;
-                    if (kategory == 1) type = Product.Kategory.Sport;
-                    else if (kategory == 2) type = Product.Kategory.Clothes;
-                    else if (kategory == 3) type = Product.Kategory.Gadget;
-                    else if (kategory == 4) type = Product.Kategory.Food;
-                    else if (kategory == 5) type = Product.Kategory.Another;
+                    Category type;
+                    if (kategory == 1) type = Category.Sport;
+                    else if (kategory == 2) type = Category.Clothes;
+                    else if (kategory == 3) type = Category.Gadget;
+                    else if (kategory == 4) type = Category.Food;
+                    else if (kategory == 5) type = Category.Another;
                     else
                     {
                         Console.WriteLine("Invalidd value entered");
